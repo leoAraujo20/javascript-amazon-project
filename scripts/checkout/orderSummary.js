@@ -116,6 +116,7 @@ export function renderOrderSummary(){
             );
             container.remove();
             updateCartQuantity();
+            renderPaymentSummary();
         });
     });
     
@@ -153,6 +154,7 @@ export function renderOrderSummary(){
             quantityLabel.innerHTML = newQuantity;
             updateCartQuantity();
             container.classList.remove("is-editing-quantity");
+            renderPaymentSummary();
         });
     });
     
