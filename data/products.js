@@ -11,7 +11,7 @@ export function getProduct(productId) {
     return matchingProduct;
 }
 
-class Product {
+export class Product {
     id;
     image;
     name;
@@ -24,6 +24,7 @@ class Product {
         this.name = productDetails.name;
         this.rating = productDetails.rating;
         this.priceCents = productDetails.priceCents;
+        this.keywords = productDetails.keywords;
     }
 
     getStarsUrl() {
@@ -40,21 +41,41 @@ class Product {
 
 }
 
-class Clothing extends Product{
+export class Clothing extends Product{
     sizeChartLink;
 
     constructor (productDetails){
         super(productDetails);
         this.sizeChartLink = productDetails.sizeChartLink;
+        this.type = productDetails.type;
     }
 
     extraInfoHTML() {
         // super.extraInfoHTML();
         return `
-        <a href="${this.sizeChartLink}" target="_blank">Size chart</a>
+            <a href="${this.sizeChartLink}" target="_blank">Size chart</a>
         `;
     }
 }
+
+export class Appliance extends Product {
+
+    constructor(productDetails) {
+        super(productDetails);
+        this.type = productDetails.type;
+        this.instructionsLink = productDetails.instructionsLink;
+        this.warrantyLink = productDetails.warrantyLink;
+    }
+
+    extraInfoHTML() {
+        return `
+            <a href="${this.instructionsLink}" target="_blank">Instructions</a>
+            <a href="${this.warrantyLink}" target="_blank">Warranty</a>
+        `
+    }
+
+}
+
 
 export const products = [
     {
@@ -102,6 +123,9 @@ export const products = [
         },
         priceCents: 1899,
         keywords: ["toaster", "kitchen", "appliances"],
+        type: "appliance",
+        instructionsLink: "images/appliance-instructions.png",
+        warrantyLink: "images/appliance-warranty.png",
     },
     {
         id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -535,8 +559,11 @@ export const products = [
         keywords: ["sweaters", "hoodies", "apparel", "mens"],
     },
 ].map((productDetails) => {
+    
     if (productDetails.type === "clothing") {
         return new Clothing(productDetails);
+    } else if (productDetails.type === "appliance") {
+        return new Appliance(productDetails);
     } else {
         return new Product(productDetails);
     }
