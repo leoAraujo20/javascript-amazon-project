@@ -90,6 +90,7 @@ export function loadProductsFetch() {
                     return new Product(productDetails);
                 }
             });
+            console.log("products loaded");
         });
     return promise;
 }
