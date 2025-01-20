@@ -5,7 +5,7 @@ import {
     calculateDeliveryDate,
 } from "../../data/deliveryOptions.js";
 import { formatCurrency } from "../utils/money.js";
-import { addOrder, orders } from "../../data/orders.js";
+import { addOrder, orders, saveToStorage } from "../../data/orders.js";
 
 export function renderPaymentSummary() {
     let productPriceCents = 0;

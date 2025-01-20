@@ -3,10 +3,8 @@ import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadProducts, loadProductsFetch } from "../../data/products.js";
 
 describe("Test suit: Render order summary", () => {
-    beforeAll((done) => {
-        loadProductsFetch().then(() => {
-            done();
-        });
+    beforeAll(async () => {
+        await loadProductsFetch();
     });
 
     beforeEach(() => {
